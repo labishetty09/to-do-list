@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>To-Do List</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-image: url(https://www.sheknows.com/wp-content/uploads/2018/08/dgldbejjyofmcsfvkfd9.jpeg);
+    background-size: 100%;
+    background-position: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.todolist {
+    background-color: cornflowerblue;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.801);
+}
+
+h1 {
+    text-align: center;
+    font-family: cursive;
+    color: rgba(247, 0, 255, 0.719)(255, 0, 204)
+}
+
+
+.input-container {
+    display: flex;
+    margin-top: 20px;
+}
+
+.internalbox {
+    flex: 1;
+    padding: 8px;
+}
+
+button {
+    padding: 8px 12px;
+    background-color: mediumturquoise;
+    color: honeydew;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    background-color: wheat;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.task button {
+    background-color: yellow;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+.task button:hover {
+    background-color: grey;
+}
+
+.edit-input {
+    flex: 1;
+    padding: 8px;
+}
+</style>
+</head>
+<body>
+    <div class="todolist">
+        <h1>TO-DO LIST</h1>
+        <div id="tasks">
+           
+        </div>
+        <div class="internalbox">
+            <input type="text" id="todoInput" placeholder="ADD YOUR TASK">
+            <button onclick="addTask()">ADD TASK </button>
+        </div>
+    </div>
+    <script>
+        function addTask() {
+        const taskInput = document.getElementById('todoInput');
+        const tasksContainer = document.getElementById('tasks');
+    
+        if (todoInput.value.trim() !== '') {
+            const taskDiv = document.createElement('div');
+            taskDiv.className = 'task';
+    
+            const taskText = document.createElement('span');
+            taskText.innerText = todoInput.value;
+    
+            const editButton = document.createElement('button');
+            editButton.innerText = 'Edit';
+            editButton.addEventListener('click', function () {
+                editTask(taskText, taskDiv);
+            });
+    
+            const deleteButton = document.createElement('button');
+            deleteButton.innerText = 'Delete';
+            deleteButton.addEventListener('click', function () {
+                tasksContainer.removeChild(taskDiv);
+            });
+    
+            taskDiv.appendChild(taskText);
+            taskDiv.appendChild(editButton);
+            taskDiv.appendChild(deleteButton);
+            tasksContainer.appendChild(taskDiv);
+    
+            todoInput.value = '';
+        }
+    }
+    
+    function editTask(taskText, taskDiv) {
+        const editText = prompt('Edit task:', taskText.innerText);
+    
+        if (editText !== null) {
+            taskText.innerText = editText;
+        }
+    }
+     </script>
+</body>
+</html>
